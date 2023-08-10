@@ -1,13 +1,15 @@
-# Sample Hardhat Project
+# In-Tigr
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+For setup run:
 
-Try running some of the following tasks:
+```sh
+yarn
+```
 
 ```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
+yarn hardhat help
+yarn hardhat test
+yarnORT_GAS=true npx hardhat test
+yarn hardhat node
+yarn hardhat run scripts/deploy.ts
 ```
