@@ -1,0 +1,19 @@
+{
+  "name": "DASH Tigr",
+  "description": "Cypherpunk Tigr Collection",
+  "image": "https://cloudflare-ipfs.com/ipfs/QmeQ1v2Nk1JnxrWrVqx1PDJHHri5eKtsEti74LquM6AgQE",
+  "attributes": [
+    {
+      "trait_type": "Symbol",
+      "value": "DASH"
+    },
+    {
+      "trait_type": "backGround",
+      "value": "Black"
+    },
+    {
+      "trait_type": "Color",
+      "value": "Blue"
+    }
+  ]
+}

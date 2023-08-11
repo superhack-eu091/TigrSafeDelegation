@@ -1,0 +1,19 @@
+{
+  "name": "BTC Tigr",
+  "description": "Cypherpunk Tigr Collection",
+  "image": "https://cloudflare-ipfs.com/ipfs/QmZz1NAD3nR2CatX9xCordJWw44A5WZWRcgMjtqqBZYWvt",
+  "attributes": [
+    {
+      "trait_type": "Symbol",
+      "value": "BTC"
+    },
+    {
+      "trait_type": "backGround",
+      "value": "Green"
+    },
+    {
+      "trait_type": "Color",
+      "value": "Orange"
+    }
+  ]
+}

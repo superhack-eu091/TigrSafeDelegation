@@ -1,0 +1,19 @@
+{
+  "name": "XMR Tigr",
+  "description": "Cypherpunk Tigr Collection",
+  "image": "https://cloudflare-ipfs.com/ipfs/QmeMwsFXxLHqe6D3DqL1XoqV55KgiLaMBnebvBUYmRYrb1",
+  "attributes": [
+    {
+      "trait_type": "Symbol",
+      "value": "XMR"
+    },
+    {
+      "trait_type": "backGround",
+      "value": "Orange"
+    },
+    {
+      "trait_type": "Color",
+      "value": "White"
+    }
+  ]
+}
