@@ -1,0 +1,19 @@
+{
+  "name": "UNI Tigr",
+  "description": "Cypherpunk Tigr Collection",
+  "image": "https://cloudflare-ipfs.com/ipfs/Qmb6dX62z1RyjA2hFRvWwWA1MohFQNeZTkYbqtkkTAvukw",
+  "attributes": [
+    {
+      "trait_type": "Symbol",
+      "value": "UNI"
+    },
+    {
+      "trait_type": "backGround",
+      "value": "Black"
+    },
+    {
+      "trait_type": "Color",
+      "value": "Pink"
+    }
+  ]
+}

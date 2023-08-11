@@ -1,0 +1,19 @@
+{
+  "name": "ETH Tigr",
+  "description": "Cypherpunk Tigr Collection",
+  "image": "https://cloudflare-ipfs.com/ipfs/QmWLR5aTj1wsSDLnsxLpwk9cjHRPsMHkeAcnm9AxdCVpfm",
+  "attributes": [
+    {
+      "trait_type": "Symbol",
+      "value": "ETH"
+    },
+    {
+      "trait_type": "backGround",
+      "value": "Black"
+    },
+    {
+      "trait_type": "Color",
+      "value": "Purple"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "name": "DOGE Tigr",
+  "description": "Cypherpunk Tigr Collection",
+  "image": "https://cloudflare-ipfs.com/ipfs/QmWQZLHd7dzKTiMwRmUcFuTioiDfymWWLsNeVDNUaqJ2Zj",
+  "attributes": [
+    {
+      "trait_type": "Symbol",
+      "value": "DOGE"
+    },
+    {
+      "trait_type": "backGround",
+      "value": "White"
+    },
+    {
+      "trait_type": "Color",
+      "value": "Brown"
+    }
+  ]
+}
