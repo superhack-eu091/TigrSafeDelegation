@@ -120,7 +120,7 @@ async function initProvider(selectedNetwork: string){
   // optimism-goerli
   // ToDO: Add Base 
   const infuraApiKey = process.env.INFURA_API_KEY;
-  const pkey = process.env.PRIVATE_KEY_ACCOUNT1;
+  const pkey = process.env.PRIVATE_KEY_ACCOUNT2;
   const providerUrl = `https://${selectedNetwork}.infura.io/v3/${infuraApiKey}`;
   const wallet = new ethers.Wallet(`${pkey}`);
         
@@ -179,7 +179,12 @@ async function deploySafe(owners: string | string[], customThreshold?: number, m
   const moduleToAdd = moduleAddress !== undefined ? moduleAddress : defaultModuleAddress;
 
   // Call the addSafeSendModule method with the module address
-  await addSafeSendModule(moduleToAdd);
+  const isOwner = await safeSdk.isOwner(safeOwner.address) 
+  if (isOwner)
+      await addSafeSendModule(moduleToAdd);
+  else
+      console.log("cannot add safeSendModule you are not an owner");
+
 }
 
 async function connectSafe(safeAddress: string, moduleAddress?: string){
@@ -188,9 +193,13 @@ async function connectSafe(safeAddress: string, moduleAddress?: string){
   // Set the default module address if not provided (Goerli default)
   const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
   const moduleToAdd = moduleAddress !== undefined ? moduleAddress : defaultModuleAddress;
-
+  
   // Call the addSafeSendModule method with the module address
-  await addSafeSendModule(moduleToAdd);
+  const isOwner = await safeSdk.isOwner(safeOwner.address) 
+  if (isOwner)
+      await addSafeSendModule(moduleToAdd);
+  else
+      console.log("cannot add safeSendModule you are not an owner");
 }
 
 async function printSafeInfo(){
