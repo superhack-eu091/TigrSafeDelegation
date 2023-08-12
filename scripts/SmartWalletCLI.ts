@@ -146,25 +146,51 @@ async function initEthAdapter(selectedNetwork: string){
   });  
 }
 
-async function deploySafe( owners: string | string [] ){
+async function addSafeSendModule(moduleAddress: string){ 
+    const moduleEnabled = await safeSdk.isModuleEnabled(moduleAddress)
+    if( moduleEnabled ) 
+        console.log(`the Module is already added to this safe\n`);
+    else {
+        const safeTransaction = await safeSdk.createEnableModuleTx(moduleAddress)
+        const txResponse = await safeSdk.executeTransaction(safeTransaction)
+        await txResponse.transactionResponse?.wait()
+    }
+}
 
+async function deploySafe(owners: string | string[], customThreshold?: number, moduleAddress?: string) {
   const safeFactory = await SafeFactory.create({ ethAdapter });
 
-  if(typeof owners === 'string' )
+  if (typeof owners === 'string') {
     owners = [owners];
+  }
 
-  const threshold = 1;
+  const threshold = customThreshold !== undefined ? customThreshold : 1;
+
   const safeAccountConfig: SafeAccountConfig = {
-      owners,
-      threshold
-      // ...
+    owners,
+    threshold,
+    // ...
   };
 
   safeSdk = await safeFactory.deploySafe({ safeAccountConfig });
+
+  // Set the default module address if not provided (Goerli default)
+  const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
+  const moduleToAdd = moduleAddress !== undefined ? moduleAddress : defaultModuleAddress;
+
+  // Call the addSafeSendModule method with the module address
+  await addSafeSendModule(moduleToAdd);
 }
 
-async function connectSafe(safeAddress: string){
+async function connectSafe(safeAddress: string, moduleAddress?: string){
   safeSdk = await Safe.create({ ethAdapter: ethAdapter, safeAddress })
+  
+  // Set the default module address if not provided (Goerli default)
+  const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
+  const moduleToAdd = moduleAddress !== undefined ? moduleAddress : defaultModuleAddress;
+
+  // Call the addSafeSendModule method with the module address
+  await addSafeSendModule(moduleToAdd);
 }
 
 async function printSafeInfo(){
