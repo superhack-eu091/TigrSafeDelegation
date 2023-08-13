@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.8.2",
+    "@squirrel-labs/peanut-sdk": "^0.0.80",
     "dotenv": "^16.0.3",
     "readline": "^1.3.0"
   }
