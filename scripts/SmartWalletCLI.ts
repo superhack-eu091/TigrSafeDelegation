@@ -2,7 +2,7 @@
 // EXTEME CODING PLEASE IGNORE QUALITY AND VERIFICATIONS
 import { ethers } from "hardhat";
 import Safe, { EthersAdapter, SafeFactory, SafeAccountConfig, EthersAdapterConfig } from '@safe-global/protocol-kit'
-import { SafeTransaction, SafeTransactionDataPartial } from '@safe-global/safe-core-sdk-types'
+import { SafeTransaction, SafeTransactionDataPartial, SwapOwnerTxParams } from '@safe-global/safe-core-sdk-types'
 import * as readline from "readline";
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -157,7 +157,12 @@ async function addSafeSendModule(moduleAddress: string){
     }
 }
 
-async function deploySafe(owners: string | string[], customThreshold?: number, moduleAddress?: string) {
+
+async function deploySafe(owners: string | string[],
+                                   toAddress?: string,
+                                   customThreshold?: number,
+                                   moduleAddress?: string) {
+  // The TiGr-bot deploys a safe to another user 
   const safeFactory = await SafeFactory.create({ ethAdapter });
 
   if (typeof owners === 'string') {
@@ -175,23 +180,34 @@ async function deploySafe(owners: string | string[], customThreshold?: number, m
   safeSdk = await safeFactory.deploySafe({ safeAccountConfig });
 
   // Set the default module address if not provided (Goerli default)
-  const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
+  //const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
+  // Set the default module address if not provided (Optimism-Goerli default)
+  const defaultModuleAddress = '0x6e4317694661BBd113Fd3907Dd0E34A6acFcac17';
   const moduleToAdd = moduleAddress !== undefined ? moduleAddress : defaultModuleAddress;
 
   // Call the addSafeSendModule method with the module address
-  const isOwner = await safeSdk.isOwner(safeOwner.address) 
-  if (isOwner)
-      await addSafeSendModule(moduleToAdd);
+  const safeOwnerAddress: string = safeOwner.address
+  if (await safeSdk.isOwner(safeOwnerAddress)){
+    await addSafeSendModule(moduleToAdd);
+    // Set the default to address if not provided (the bot keeps it)
+    if (toAddress != undefined){
+      const params: SwapOwnerTxParams = {safeOwnerAddress, toAddress};
+      const safeTransaction = await safeSdk.createSwapOwnerTx(params);
+      const txResponse = await safeSdk.executeTransaction(safeTransaction);
+      await txResponse.transactionResponse?.wait()     
+    }
+  }
   else
       console.log("cannot add safeSendModule you are not an owner");
-
 }
 
 async function connectSafe(safeAddress: string, moduleAddress?: string){
   safeSdk = await Safe.create({ ethAdapter: ethAdapter, safeAddress })
   
   // Set the default module address if not provided (Goerli default)
-  const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
+  //const defaultModuleAddress = '0x3e85A3d5654ef96dB74f0A2d2C5154223E62b7e3';
+  // Set the default module address if not provided (Optimism-Goerli default)
+  const defaultModuleAddress = '0x6e4317694661BBd113Fd3907Dd0E34A6acFcac17';
   const moduleToAdd = moduleAddress !== undefined ? moduleAddress : defaultModuleAddress;
   
   // Call the addSafeSendModule method with the module address
